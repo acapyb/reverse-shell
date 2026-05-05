@@ -8,6 +8,8 @@ This repository is for **educational purposes only**. Do not use these scripts o
 
 
 USE 'attacker.py' in VM such as Ubuntu or Linux
+
 USE 'victim.py' in victim device
 
-Needs to be in the same network tu run this!!!
+
+Needs to be in the same network to run this!!!
