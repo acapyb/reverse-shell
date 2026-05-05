@@ -5,3 +5,9 @@ A collection of reverse shell scripts for educational purposes and authorized pe
 ## ⚠️ Disclaimer
 
 This repository is for **educational purposes only**. Do not use these scripts on systems you do not own or have explicit permission to test. Unauthorized access is illegal.
+
+
+USE 'attacker.py' in VM such as Ubuntu or Linux
+USE 'victim.py' in victim device
+
+Needs to be in the same network tu run this!!!
